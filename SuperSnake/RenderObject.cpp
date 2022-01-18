@@ -13,7 +13,7 @@ ss_t::Vector2d<int> RenderObject::get_position()
 	return position;
 }
 
-char RenderObject::get_type()
+int RenderObject::get_type()
 {
 	return type;
 }

@@ -9,7 +9,7 @@ class Snake : public ISubjectMixin, public Render_Mixin
 {
 	std::list<ss_t::Vector2d<int>>	segments;
 	int								direction;
-	int								size;
+	size_t							size;
 	InputManager					*input_manager;
 	
 	Snake();

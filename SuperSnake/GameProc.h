@@ -16,7 +16,6 @@
 
 class GameProc
 {
-	// try to set const
 	ss_t::Vector2d<int> field_size;
 	InputManager *input_manager;
 public:

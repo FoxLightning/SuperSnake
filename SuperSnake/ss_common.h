@@ -4,6 +4,11 @@
 namespace ss_c
 // constants
 {
+	enum colision_cases {
+		NOTHING = 0,
+		GAME_OVER,
+		INCREASE_SCORE,
+	};
 	enum object_types {
 		HEAD = 0,
 		TAIL,
