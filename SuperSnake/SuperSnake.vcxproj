@@ -146,6 +146,12 @@
     <ClCompile Include="Apple.cpp" />
     <ClCompile Include="GameProc.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="ISubjectMixin.cpp" />
+    <ClCompile Include="PhysicalObject.cpp" />
+    <ClCompile Include="PhysicalProc.cpp" />
+    <ClCompile Include="RenderObject.cpp" />
+    <ClCompile Include="RenderProc.cpp" />
+    <ClCompile Include="Render_Mixin.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="SuperSnake.cpp" />
@@ -154,6 +160,12 @@
     <ClInclude Include="Apple.h" />
     <ClInclude Include="GameProc.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="ISubjectMixin.h" />
+    <ClInclude Include="PhysicalObject.h" />
+    <ClInclude Include="PhysicalProc.h" />
+    <ClInclude Include="RenderObject.h" />
+    <ClInclude Include="RenderProc.h" />
+    <ClInclude Include="Render_Mixin.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="ss_common.h" />
   </ItemGroup>

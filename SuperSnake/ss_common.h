@@ -1,8 +1,15 @@
 #pragma once
 
+
 namespace ss_c
 // constants
 {
+	enum object_types {
+		HEAD = 0,
+		TAIL,
+		APPLE,
+		BORDER
+	};
 	enum direction {
 		WEST = 0,
 		EAST,

@@ -4,7 +4,7 @@
 void Snake::increase_size(int value)
 {
 	for (int i = 0; i < value; i++) {
-		segments.push_back(ss_t::Vector2d<int>{1+ i, 1+ i});
+		segments.push_back(ss_t::Vector2d<int>{2, 2});
 	}
 }
 
@@ -20,30 +20,55 @@ Snake::Snake(ss_t::Vector2d<int> start_position)
 
 void Snake::set_direction(int new_direction)
 {
-	direction = direction == ss_c::WEST ? direction : ss_c::EAST;
-}
-
-void Snake::get_input()
-{
-	switch (input_manager->get_key())
+	switch (new_direction)
 	{
-	case 'a':
-		direction = (direction == ss_c::EAST) ? direction : ss_c::WEST;
-		direction = ss_c::WEST;
+	case ss_c::WEST:
+		if (direction != ss_c::EAST)
+		{
+			direction = new_direction;
+		}
 		break;
-	case 'd':
-		direction = (direction == ss_c::WEST) ? direction : ss_c::EAST;
+	case ss_c::EAST:
+		if (direction != ss_c::WEST)
+		{
+			direction = new_direction;
+		}
 		break;
-	case 'w':
-		direction = (direction == ss_c::SOUTH) ? direction : ss_c::NORTH;
+	case ss_c::NORTH:
+		if (direction != ss_c::SOUTH)
+		{
+			direction = new_direction;
+		}
 		break;
-	case 's':
-		direction = (direction == ss_c::NORTH) ? direction : ss_c::SOUTH;
+	case ss_c::SOUTH:
+		if (direction != ss_c::NORTH)
+		{
+			direction = new_direction;
+		}
 		break;
 	}
 }
 
-void Snake::apply_direction()
+void Snake::get_input()
+{
+	switch (get_input_m())
+	{
+	case 'a':
+		set_direction(ss_c::WEST);
+		break;
+	case 'd':
+		set_direction(ss_c::EAST);
+		break;
+	case 'w':
+		set_direction(ss_c::NORTH);
+		break;
+	case 's':
+		set_direction(ss_c::SOUTH);
+		break;
+	}
+}
+
+void Snake::move_head()
 {
 	switch (direction)
 	{
@@ -78,9 +103,9 @@ void Snake::move_segments()
 
 void Snake::refresh_state()
 {
-	// get_input();
-	// apply_direction();
+	get_input();
 	move_segments();
+	move_head();
 }
 
 bool Snake::is_alive(ss_t::Vector2d<int> borders)
@@ -103,8 +128,16 @@ bool Snake::is_alive(ss_t::Vector2d<int> borders)
 	return true;
 }
 
-std::list<ss_t::Vector2d<int>> *Snake::get_draweble_objects()
+std::list<RenderObject> Snake::get_render_objects()
 {
-	return &segments;
+	std::list<RenderObject> render_objects;
+
+	render_objects.push_back(RenderObject(*segments.begin(), ss_c::HEAD));
+	for (std::list<ss_t::Vector2d<int>>::iterator it = ++segments.begin();
+		it != segments.end(); ++it)
+	{
+		render_objects.push_back(RenderObject(*it, ss_c::TAIL));
+	}
+	return render_objects;
 }
 

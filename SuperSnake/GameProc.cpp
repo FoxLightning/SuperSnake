@@ -1,4 +1,5 @@
 #include "GameProc.h"
+#include "RenderProc.h"
 
 static bool in_list(std::list<ss_t::Vector2d<int>> *list, ss_t::Vector2d<int> value) {
 	for (std::list<ss_t::Vector2d<int>>::iterator it = list->begin(); it != list->end(); ++it)
@@ -11,6 +12,7 @@ static bool in_list(std::list<ss_t::Vector2d<int>> *list, ss_t::Vector2d<int> va
 	return false;
 }
 
+/*
 static Apple apple_builder(Snake &snake, ss_t::Vector2d<int> field_size)
 {
 	ss_t::Vector2d<int> position{
@@ -35,6 +37,7 @@ static Apple apple_builder(Snake &snake, ss_t::Vector2d<int> field_size)
 	
 	return Apple(position, '0', 10000);
 }
+*/
 GameProc::GameProc()
 {
 	field_size = ss_t::Vector2d<int>{ 30, 30 };
@@ -46,7 +49,16 @@ void GameProc::run_game()
 {
 
 	Snake snake(ss_t::Vector2d<int>{15, 15});
-	Apple apple = apple_builder(snake, field_size);
+	RenderProc* render_proc = RenderProc::get_instance();
+	while (true)
+	{
+		snake.refresh_state();
+		render_proc->render();
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	}
+
+	// Apple apple = apple_builder(snake, field_size);
+	/*
 	int score = 0;
 	ss_t::Vector2d<int> render_cur{0,0};
 	while (true)
@@ -89,7 +101,6 @@ void GameProc::run_game()
 					std::cout << "The end" << std::endl;
 					return;
 				}
-				
 			}
 			std::cout << std::endl;
 		}
@@ -97,5 +108,6 @@ void GameProc::run_game()
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		system("cls");
 	}
+	*/
 	return;
 }

@@ -8,7 +8,6 @@ class Apple
 	char				image;
 	int					estimate;
 	time_t				birthday;
-	// blocked methods	
 	Apple();
 public:
 	Apple(ss_t::Vector2d<int>, int, int);

@@ -2,8 +2,10 @@
 #include <list>
 #include "ss_common.h"
 #include "InputManager.h"
+#include "ISubjectMixin.h"
+#include "Render_Mixin.h"
 
-class Snake
+class Snake : public ISubjectMixin, public Render_Mixin
 {
 	std::list<ss_t::Vector2d<int>>	segments;
 	int								direction;
@@ -11,16 +13,16 @@ class Snake
 	InputManager					*input_manager;
 	
 	Snake();
+
+	void get_input();
+	void move_head();
+	void move_segments();
 public:
-	Snake(ss_t::Vector2d<int> start_position);
-	// ~Snake();
+	Snake(ss_t::Vector2d<int>);
 	
 	void refresh_state();
-	void get_input();
-	void apply_direction();
-	void move_segments();
 
-	std::list<ss_t::Vector2d<int>> *get_draweble_objects();
+	std::list<RenderObject> get_render_objects();
 
 	void set_direction(int);
 	void increase_size(int);
