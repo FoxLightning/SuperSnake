@@ -25,7 +25,7 @@ public:
 	void refresh_state();
 
 	std::list<BasePrimitive> get_render_objects();
-	std::list<BasePrimitive> get_physical_objects();
+	std::list<BasePrimitive> get_primitives();
 	void set_direction(int);
 	void increase_size(int);
 	bool is_alive(ss_t::Vector2d<int>);

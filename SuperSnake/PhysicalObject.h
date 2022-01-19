@@ -1,13 +1,13 @@
 #pragma once
 #include <list>
 #include "BasePrimitive.h"
+#include "Subscriber.h"
 
-class PhysicalObject
+class PhysicalObject: public Subscriber
 {
 
 public:
 	PhysicalObject();
 	~PhysicalObject();
-	virtual std::list<BasePrimitive> get_physical_objects() = 0;
 };
 

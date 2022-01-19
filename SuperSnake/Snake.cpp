@@ -18,7 +18,6 @@ Snake::Snake(ss_t::Vector2d<int> start_position)
 	increase_size(5);
 	size = segments.size();
 	PhysicalProc* po = PhysicalProc::get_instance();
-	po->add_head(&(* segments.begin()));
 }
 
 void Snake::set_direction(int new_direction)
@@ -144,7 +143,7 @@ std::list<BasePrimitive> Snake::get_render_objects()
 	return render_objects;
 }
 
-std::list<BasePrimitive> Snake::get_physical_objects()
+std::list<BasePrimitive> Snake::get_primitives()
 {
 	std::list<BasePrimitive> render_objects;
 

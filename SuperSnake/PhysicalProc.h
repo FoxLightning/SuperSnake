@@ -3,23 +3,18 @@
 #include <mutex>
 #include "PhysicalObject.h"
 #include "BasePrimitive.h"
+#include "Observer.h"
 #include "ss_common.h"
 
-class PhysicalProc 
+class PhysicalProc: public Observer
 {
-	std::list<PhysicalObject*> physical_objects;
-
 	inline static PhysicalProc* physical_proc;
 	inline static std::mutex mutex_;
 
 	PhysicalProc() {};
-public:
 
-	ss_t::Vector2d<int> *head;
+public:
 	static PhysicalProc* get_instance();
-	void add_physical_object(PhysicalObject*);
-	void add_head(ss_t::Vector2d<int> *);
-	void remove_physical_object(PhysicalObject*);
 	int check_colision();
 };
 

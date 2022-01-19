@@ -1,6 +1,5 @@
 #pragma once
 #include <list>
-#include "Observer.h"
 #include "BasePrimitive.h"
 
 class Subscriber

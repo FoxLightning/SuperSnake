@@ -1,12 +1,12 @@
 #pragma once
 #include <list>
 #include "BasePrimitive.h"
+#include "Subscriber.h"
 
-class RenderableObject
+class RenderableObject: public Subscriber
 {
 public:
 	RenderableObject();
 	~RenderableObject();
-	virtual std::list<BasePrimitive> get_render_objects() = 0;
 };
 

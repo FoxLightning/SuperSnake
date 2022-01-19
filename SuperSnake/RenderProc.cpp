@@ -20,19 +20,14 @@ RenderProc* RenderProc::get_instance()
 	return render_proc;
 }
 
+inline int RenderProc::arrey_position(int x, int y)
+{
+	return y * (field_width + 1) + x;
+}
+
 RenderProc::~RenderProc()
 {
 	delete[] render_field;
-}
-
-void RenderProc::add_render_subject(RenderableObject* render_subject)
-{
-	render_subjects.push_back(render_subject);
-}
-
-void RenderProc::remove_render_subject(RenderableObject* render_subject)
-{
-	render_subjects.remove(render_subject);
 }
 
 static inline char get_image_type(int type)
@@ -54,24 +49,17 @@ static inline char get_image_type(int type)
 
 inline void RenderProc::fill_field()
 {
-	ss_t::Vector2d<int> current_pos{ 0, 0 };
-	int	current_type = 0;
-	std::list<BasePrimitive> render_objects;
+	int							current_type = 0;
+	ss_t::Vector2d<int>			current_pos{ 0, 0 };
+	std::list<BasePrimitive>	primitives_list = get_primitives();
 
-	for (std::list<RenderableObject*>::iterator render_mixin_it = render_subjects.begin();
-		render_mixin_it != render_subjects.end(); ++render_mixin_it)
+	for (std::list<BasePrimitive>::iterator primitives_it = primitives_list.begin();
+		primitives_it != primitives_list.end(); ++primitives_it)
 	{
-		render_objects = (*render_mixin_it)->get_render_objects();
-
-		for (std::list<BasePrimitive>::iterator render_objects_it = render_objects.begin();
-			render_objects_it != render_objects.end(); ++render_objects_it)
-		{
-			current_pos = render_objects_it->get_position();
-			current_type = get_image_type(render_objects_it->get_type());
-			render_field[current_pos.y * (field_width+1) + current_pos.x] = current_type;
-		}
+		current_pos = primitives_it->get_position();
+		current_type = get_image_type(primitives_it->get_type());
+		render_field[arrey_position(current_pos.x, current_pos.y)] = current_type;
 	}
-	
 }
 
 inline void RenderProc::clear_field()
