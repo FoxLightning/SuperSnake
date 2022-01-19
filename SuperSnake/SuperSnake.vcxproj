@@ -154,7 +154,6 @@
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Subscriber.cpp" />
     <ClCompile Include="SuperSnake.cpp" />
   </ItemGroup>
   <ItemGroup>
