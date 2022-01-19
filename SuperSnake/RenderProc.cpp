@@ -25,12 +25,12 @@ RenderProc::~RenderProc()
 	delete[] render_field;
 }
 
-void RenderProc::add_render_subject(Render_Mixin* render_subject)
+void RenderProc::add_render_subject(RenderableObject* render_subject)
 {
 	render_subjects.push_back(render_subject);
 }
 
-void RenderProc::remove_render_subject(Render_Mixin* render_subject)
+void RenderProc::remove_render_subject(RenderableObject* render_subject)
 {
 	render_subjects.remove(render_subject);
 }
@@ -56,14 +56,14 @@ inline void RenderProc::fill_field()
 {
 	ss_t::Vector2d<int> current_pos{ 0, 0 };
 	int	current_type = 0;
-	std::list<RenderObject> render_objects;
+	std::list<BasePrimitive> render_objects;
 
-	for (std::list<Render_Mixin*>::iterator render_mixin_it = render_subjects.begin();
+	for (std::list<RenderableObject*>::iterator render_mixin_it = render_subjects.begin();
 		render_mixin_it != render_subjects.end(); ++render_mixin_it)
 	{
 		render_objects = (*render_mixin_it)->get_render_objects();
 
-		for (std::list<RenderObject>::iterator render_objects_it = render_objects.begin();
+		for (std::list<BasePrimitive>::iterator render_objects_it = render_objects.begin();
 			render_objects_it != render_objects.end(); ++render_objects_it)
 		{
 			current_pos = render_objects_it->get_position();

@@ -8,7 +8,7 @@ InputManager::InputManager()
 		{
 			in_key = (char)_getch();
 
-			for (std::list<ISubjectMixin*>::iterator it = this->subject_list.begin();
+			for (std::list<ControlledObject*>::iterator it = this->subject_list.begin();
 				it != this->subject_list.end(); ++it)
 			{
 				(*it)->set_input_m(in_key);
@@ -28,12 +28,12 @@ InputManager* InputManager::get_instance()
 	return input_manager;
 }
 
-void InputManager::add_subject(ISubjectMixin* subject)
+void InputManager::add_subject(ControlledObject* subject)
 {
 	subject_list.push_back(subject);
 }
 
-void InputManager::remove_subject(ISubjectMixin* subject)
+void InputManager::remove_subject(ControlledObject* subject)
 {
 	subject_list.remove(subject);
 }

@@ -10,7 +10,6 @@
 
 #include "ss_common.h"
 #include "Snake.h"
-#include "Apple.h"
 #include "InputManager.h"
 
 

@@ -1,11 +1,11 @@
 #pragma once
 
-class ISubjectMixin
+class ControlledObject
 {
 	char input;
 public:
-	ISubjectMixin();
-	~ISubjectMixin();
+	ControlledObject();
+	~ControlledObject();
 
 	char get_input_m();
 	void set_input_m(char);

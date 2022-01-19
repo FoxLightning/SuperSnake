@@ -4,17 +4,17 @@
 #include <stdlib.h>
 #include <list>
 #include <mutex>
-#include "ISubjectMixin.h"
+#include "ControlledObject.h"
 
 class InputManager
 {
-	std::list<ISubjectMixin*> subject_list;
+	std::list<ControlledObject*> subject_list;
 	inline static InputManager* input_manager;
 	inline static std::mutex mutex_;
 
 	InputManager();
 public:
 	static InputManager* get_instance();
-	void add_subject(ISubjectMixin* subject);
-	void remove_subject(ISubjectMixin* subject);
+	void add_subject(ControlledObject* subject);
+	void remove_subject(ControlledObject* subject);
 };

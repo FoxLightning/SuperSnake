@@ -1,5 +1,6 @@
 #include "GameProc.h"
 #include "RenderProc.h"
+#include "PhysicalProc.h"
 
 static bool in_list(std::list<ss_t::Vector2d<int>> *list, ss_t::Vector2d<int> value) {
 	for (std::list<ss_t::Vector2d<int>>::iterator it = list->begin(); it != list->end(); ++it)
@@ -12,32 +13,6 @@ static bool in_list(std::list<ss_t::Vector2d<int>> *list, ss_t::Vector2d<int> va
 	return false;
 }
 
-/*
-static Apple apple_builder(Snake &snake, ss_t::Vector2d<int> field_size)
-{
-	ss_t::Vector2d<int> position{
-		rand() % field_size.x,
-		rand() % field_size.y
-	};
-	
-	while (in_list(snake.get_draweble_objects(), position))
-	{
-		if (position.x >= field_size.x)
-		{
-			position.x = 0;
-			position.y++;
-			if (position.y >= field_size.y)
-			{
-				position.y = 0;
-			}
-		}
-		position.x++;
-	}
-
-	
-	return Apple(position, '0', 10000);
-}
-*/
 GameProc::GameProc()
 {
 	field_size = ss_t::Vector2d<int>{ 30, 30 };
@@ -50,10 +25,20 @@ void GameProc::run_game()
 
 	Snake snake(ss_t::Vector2d<int>{15, 15});
 	RenderProc* render_proc = RenderProc::get_instance();
+	PhysicalProc* physical_proc = PhysicalProc::get_instance();
 	while (true)
 	{
+
 		snake.refresh_state();
 		render_proc->render();
+
+		if (physical_proc->check_colision() == ss_c::GAME_OVER)
+		{
+			std::cout << "Game Over" << std::endl;
+			std::cout << "x = " << physical_proc->head->x << std::endl;
+			std::cout << "y = " << physical_proc->head->y << std::endl;
+			return;
+		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	}
 

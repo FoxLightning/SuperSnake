@@ -1,26 +1,26 @@
-#include "ISubjectMixin.h"
+#include "ControlledObject.h"
 #include "InputManager.h"
 
 
-ISubjectMixin::ISubjectMixin()
+ControlledObject::ControlledObject()
 {
 	input = 0;
 	InputManager* input_manager = InputManager::get_instance();
 	input_manager->add_subject(this);
 }
 
-ISubjectMixin::~ISubjectMixin()
+ControlledObject::~ControlledObject()
 {
 	InputManager* input_manager = InputManager::get_instance();
 	input_manager->remove_subject(this);
 }
 
-char ISubjectMixin::get_input_m()
+char ControlledObject::get_input_m()
 {
 	return input;
 }
 
-void ISubjectMixin::set_input_m(char in_char)
+void ControlledObject::set_input_m(char in_char)
 {
 	input = in_char;
 }

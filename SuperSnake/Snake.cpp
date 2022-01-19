@@ -1,5 +1,7 @@
 #include "Snake.h"
 #include "iostream"
+#include "BasePrimitive.h"
+#include "PhysicalProc.h"
 
 void Snake::increase_size(int value)
 {
@@ -15,7 +17,8 @@ Snake::Snake(ss_t::Vector2d<int> start_position)
 	segments.push_back(start_position);
 	increase_size(5);
 	size = segments.size();
-	std::cout << size << std::endl;
+	PhysicalProc* po = PhysicalProc::get_instance();
+	po->add_head(&(* segments.begin()));
 }
 
 void Snake::set_direction(int new_direction)
@@ -128,16 +131,28 @@ bool Snake::is_alive(ss_t::Vector2d<int> borders)
 	return true;
 }
 
-std::list<RenderObject> Snake::get_render_objects()
+std::list<BasePrimitive> Snake::get_render_objects()
 {
-	std::list<RenderObject> render_objects;
+	std::list<BasePrimitive> render_objects;
 
-	render_objects.push_back(RenderObject(*segments.begin(), ss_c::HEAD));
+	render_objects.push_back(BasePrimitive(*segments.begin(), ss_c::HEAD));
 	for (std::list<ss_t::Vector2d<int>>::iterator it = ++segments.begin();
 		it != segments.end(); ++it)
 	{
-		render_objects.push_back(RenderObject(*it, ss_c::TAIL));
+		render_objects.push_back(BasePrimitive(*it, ss_c::TAIL));
 	}
 	return render_objects;
 }
 
+std::list<BasePrimitive> Snake::get_physical_objects()
+{
+	std::list<BasePrimitive> render_objects;
+
+	render_objects.push_back(BasePrimitive(*segments.begin(), ss_c::HEAD));
+	for (std::list<ss_t::Vector2d<int>>::iterator it = ++segments.begin();
+		it != segments.end(); ++it)
+	{
+		render_objects.push_back(BasePrimitive(*it, ss_c::TAIL));
+	}
+	return render_objects;
+}

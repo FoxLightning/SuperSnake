@@ -1,16 +1,16 @@
-#include "Render_Mixin.h"
+#include "RenderableObject.h"
 #include "RenderProc.h"
 
-Render_Mixin::Render_Mixin()
+RenderableObject::RenderableObject()
 {
 	RenderProc *render_proc = RenderProc::get_instance();
 	render_proc->add_render_subject(this);
 }
 
-Render_Mixin::~Render_Mixin()
+RenderableObject::~RenderableObject()
 {
 
 	RenderProc *render_proc = RenderProc::get_instance();
-	render_proc->add_render_subject(this);
+	render_proc->remove_render_subject(this);
 }
 

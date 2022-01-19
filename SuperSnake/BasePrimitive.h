@@ -1,12 +1,12 @@
 #pragma once
 #include "ss_common.h"
 
-class RenderObject
+class BasePrimitive
 {
 	ss_t::Vector2d<int> position;
 	int type;
 public:
-	RenderObject(ss_t::Vector2d<int>, char);
+	BasePrimitive(ss_t::Vector2d<int>, char);
 	ss_t::Vector2d<int> get_position();
 	int get_type();
 };

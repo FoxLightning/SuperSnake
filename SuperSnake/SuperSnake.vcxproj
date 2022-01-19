@@ -143,31 +143,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Apple.cpp" />
     <ClCompile Include="GameProc.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="ISubjectMixin.cpp" />
+    <ClCompile Include="ControlledObject.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PhysicalObject.cpp" />
     <ClCompile Include="PhysicalProc.cpp" />
-    <ClCompile Include="RenderObject.cpp" />
+    <ClCompile Include="BasePrimitive.cpp" />
     <ClCompile Include="RenderProc.cpp" />
-    <ClCompile Include="Render_Mixin.cpp" />
+    <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Subscriber.cpp" />
     <ClCompile Include="SuperSnake.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Apple.h" />
     <ClInclude Include="GameProc.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="ISubjectMixin.h" />
+    <ClInclude Include="ControlledObject.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="PhysicalObject.h" />
     <ClInclude Include="PhysicalProc.h" />
-    <ClInclude Include="RenderObject.h" />
+    <ClInclude Include="BasePrimitive.h" />
     <ClInclude Include="RenderProc.h" />
-    <ClInclude Include="Render_Mixin.h" />
+    <ClInclude Include="RenderableObject.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="ss_common.h" />
+    <ClInclude Include="Subscriber.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,14 +1,14 @@
 #pragma once
 #include <iostream>
-#include "RenderObject.h"
-#include "Render_Mixin.h"
+#include "BasePrimitive.h"
+#include "RenderableObject.h"
 #include "ss_common.h"
 #include <list>
 #include <mutex>
 
 class RenderProc
 {
-	std::list<Render_Mixin*> render_subjects;
+	std::list<RenderableObject*> render_subjects;
 	char *render_field;
 	int field_height;
 	int field_width;
@@ -27,8 +27,8 @@ public:
 	~RenderProc();
 
 	static RenderProc *get_instance();
-	void add_render_subject(Render_Mixin*);
-	void remove_render_subject(Render_Mixin*);
+	void add_render_subject(RenderableObject*);
+	void remove_render_subject(RenderableObject*);
 	void render();
 };
 

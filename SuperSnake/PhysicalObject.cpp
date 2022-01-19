@@ -1,6 +1,5 @@
-/*
-#include "PhysicalProc.h"
 #include "PhysicalObject.h"
+#include "PhysicalProc.h"
 
 PhysicalObject::PhysicalObject()
 {
@@ -13,4 +12,3 @@ PhysicalObject::~PhysicalObject()
 	PhysicalProc* physical_proc = PhysicalProc::get_instance();
 	physical_proc->remove_physical_object(this);
 }
-*/
