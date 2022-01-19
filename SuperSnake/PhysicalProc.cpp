@@ -1,41 +1,31 @@
 #include "PhysicalProc.h"
 #include "Subscriber.h"
 
-int PhysicalProc::check_colision()
+int PhysicalProc::check_colision(ss_t::Vector2d<int> place, bool skip_head)
 {
 	ss_t::Vector2d<int> current_pos{ 0, 0 };
-	ss_t::Vector2d<int> head_pos{0, 0};
-	std::list<BasePrimitive> primitives_list = get_primitives();
+	std::list<ss_t::BasePrimitive> primitives_list = get_primitives();
 
-	for (std::list<BasePrimitive>::iterator primitives_it = primitives_list.begin();
+	for (std::list<ss_t::BasePrimitive>::iterator primitives_it = primitives_list.begin();
 		primitives_it != primitives_list.end(); ++primitives_it)
 	{
-		if (primitives_it->get_type() == ss_c::HEAD)
+		if (skip_head and primitives_it->type == ss_c::HEAD)
 		{
-			head_pos = primitives_it->get_position();
+			continue;
 		}
-
-	}
-
-	for (std::list<BasePrimitive>::iterator primitives_it = primitives_list.begin();
-		primitives_it != primitives_list.end(); ++primitives_it)
-	{
-		current_pos = primitives_it->get_position();
-		if (current_pos.x == head_pos.x and
-			current_pos.y == head_pos.y)
+		current_pos = primitives_it->position;
+		if (current_pos.x == place.x and
+			current_pos.y == place.y)
 		{
-			switch (primitives_it->get_type())
-			{
-			case ss_c::BORDER:
-				return ss_c::GAME_OVER;
-			case ss_c::TAIL:
-				return ss_c::GAME_OVER;
-			case ss_c::APPLE:
-				return ss_c::INCREASE_SCORE;
-			}
+			return primitives_it->type;
 		}
 	}
 	return ss_c::NOTHING;
+}
+
+int PhysicalProc::check_colision(ss_t::Vector2d<int> place)
+{
+	return check_colision(place, false);
 }
 
 PhysicalProc* PhysicalProc::get_instance()

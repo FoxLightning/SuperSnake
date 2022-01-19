@@ -1,12 +1,12 @@
 #include "Snake.h"
 #include "iostream"
-#include "BasePrimitive.h"
 #include "PhysicalProc.h"
 
 void Snake::increase_size(int value)
 {
 	for (int i = 0; i < value; i++) {
-		segments.push_back(ss_t::Vector2d<int>{2, 2});
+		segments.push_back(ss_t::BasePrimitive{ss_t::Vector2d<int>{0, 0},
+						   ss_c::TAIL});
 	}
 }
 
@@ -14,10 +14,9 @@ Snake::Snake(ss_t::Vector2d<int> start_position)
 {
 	input_manager = InputManager::get_instance();
 	direction = ss_c::NORTH;
-	segments.push_back(start_position);
+	segments.push_back(ss_t::BasePrimitive{ start_position, ss_c::HEAD });
 	increase_size(5);
 	size = segments.size();
-	PhysicalProc* po = PhysicalProc::get_instance();
 }
 
 void Snake::set_direction(int new_direction)
@@ -53,7 +52,7 @@ void Snake::set_direction(int new_direction)
 
 void Snake::get_input()
 {
-	switch (get_input_m())
+	switch (get_input_console())
 	{
 	case 'a':
 		set_direction(ss_c::WEST);
@@ -72,33 +71,39 @@ void Snake::get_input()
 
 void Snake::move_head()
 {
+
 	switch (direction)
 	{
 	case ss_c::WEST:
-		segments.begin()->x--;
+		segments.begin()->position.x--;
 		break;
 	case ss_c::EAST:
-		segments.begin()->x++;
+		segments.begin()->position.x++;
 		break;
 	case ss_c::NORTH:
-		segments.begin()->y--;
+		segments.begin()->position.y--;
 		break;
 	default:
-		segments.begin()->y++;
+		segments.begin()->position.y++;
 		break;
 	}
 }
 
+ss_t::Vector2d<int>	Snake::get_head()
+{
+	return segments.begin()->position;
+}
+
 void Snake::move_segments()
 {
-	ss_t::Vector2d<int> prev_pos = *segments.begin();
+	ss_t::Vector2d<int> prev_pos = (segments.begin())->position;
 	ss_t::Vector2d<int> tmp;
 	
-	for (std::list<ss_t::Vector2d<int>>::iterator it = ++segments.begin();
+	for (std::list<ss_t::BasePrimitive>::iterator it = ++segments.begin();
 		it != segments.end(); ++it)
 	{
-		tmp = *it;
-		*it = prev_pos;
+		tmp = it->position;
+		it->position = prev_pos;
 		prev_pos = tmp;
 	}
 }
@@ -110,48 +115,7 @@ void Snake::refresh_state()
 	move_head();
 }
 
-bool Snake::is_alive(ss_t::Vector2d<int> borders)
+std::list<ss_t::BasePrimitive> Snake::get_primitives()
 {
-	for (std::list<ss_t::Vector2d<int>>::iterator it = ++segments.begin();
-		it != segments.end(); ++it)
-	{
-		if (segments.begin()->x == it->x &&
-			segments.begin()->y == it->y)
-		{
-			return false;
-		}
-	}
-
-	if (segments.begin()->x < 1 or segments.begin()->y < 1 or
-		segments.begin()->x >= borders.x - 2 or segments.begin()->y >= borders.y - 2)
-	{
-		return false;
-	}
-	return true;
-}
-
-std::list<BasePrimitive> Snake::get_render_objects()
-{
-	std::list<BasePrimitive> render_objects;
-
-	render_objects.push_back(BasePrimitive(*segments.begin(), ss_c::HEAD));
-	for (std::list<ss_t::Vector2d<int>>::iterator it = ++segments.begin();
-		it != segments.end(); ++it)
-	{
-		render_objects.push_back(BasePrimitive(*it, ss_c::TAIL));
-	}
-	return render_objects;
-}
-
-std::list<BasePrimitive> Snake::get_primitives()
-{
-	std::list<BasePrimitive> render_objects;
-
-	render_objects.push_back(BasePrimitive(*segments.begin(), ss_c::HEAD));
-	for (std::list<ss_t::Vector2d<int>>::iterator it = ++segments.begin();
-		it != segments.end(); ++it)
-	{
-		render_objects.push_back(BasePrimitive(*it, ss_c::TAIL));
-	}
-	return render_objects;
+	return segments;
 }

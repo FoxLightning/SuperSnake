@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include "BasePrimitive.h"
 #include "RenderableObject.h"
 #include "Observer.h"
 #include "ss_common.h"
@@ -9,6 +8,12 @@
 
 class RenderProc: public Observer
 {
+	/*
+	* This class iterates over the base
+	* objects of all subscribers and contains
+	* the logic for rendering the scene 
+	*/
+
 	char *render_field;
 	int field_height;
 	int field_width;

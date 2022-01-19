@@ -143,27 +143,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AppleManager.cpp" />
+    <ClCompile Include="BorderManager.cpp" />
     <ClCompile Include="GameProc.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="ControlledObject.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PhysicalObject.cpp" />
     <ClCompile Include="PhysicalProc.cpp" />
-    <ClCompile Include="BasePrimitive.cpp" />
     <ClCompile Include="RenderProc.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="Snake.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="SuperSnake.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AppleManager.h" />
+    <ClInclude Include="BorderManager.h" />
     <ClInclude Include="GameProc.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="ControlledObject.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PhysicalObject.h" />
     <ClInclude Include="PhysicalProc.h" />
-    <ClInclude Include="BasePrimitive.h" />
     <ClInclude Include="RenderProc.h" />
     <ClInclude Include="RenderableObject.h" />
     <ClInclude Include="Snake.h" />

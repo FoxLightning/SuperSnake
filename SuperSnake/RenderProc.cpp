@@ -15,7 +15,7 @@ RenderProc* RenderProc::get_instance()
 	std::lock_guard<std::mutex> lock(mutex_);
 	if (render_proc == NULL)
 	{
-		render_proc = new RenderProc(ss_t::Vector2d<int>{30, 30});
+		render_proc = new RenderProc(ss_t::Vector2d<int>{ss_c::FIELD_WIDTH, ss_c::FIELD_HEIGHT});
 	}
 	return render_proc;
 }
@@ -43,21 +43,21 @@ static inline char get_image_type(int type)
 	case ss_c::BORDER:
 		return '#';
 	default:
-		return '?';
+		return (char)type;
 	}
 }
 
 inline void RenderProc::fill_field()
 {
-	int							current_type = 0;
-	ss_t::Vector2d<int>			current_pos{ 0, 0 };
-	std::list<BasePrimitive>	primitives_list = get_primitives();
+	int								current_type = 0;
+	ss_t::Vector2d<int>				current_pos{ 0, 0 };
+	std::list<ss_t::BasePrimitive>	primitives_list = get_primitives();
 
-	for (std::list<BasePrimitive>::iterator primitives_it = primitives_list.begin();
+	for (std::list<ss_t::BasePrimitive>::iterator primitives_it = primitives_list.begin();
 		primitives_it != primitives_list.end(); ++primitives_it)
 	{
-		current_pos = primitives_it->get_position();
-		current_type = get_image_type(primitives_it->get_type());
+		current_pos = primitives_it->position;
+		current_type = get_image_type(primitives_it->type);
 		render_field[arrey_position(current_pos.x, current_pos.y)] = current_type;
 	}
 }
@@ -72,11 +72,12 @@ inline void RenderProc::clear_field()
 	{
 		render_field[i] = '\n';
 	}
+	render_field[arrey_position(field_width - 1, field_height - 1)] = '\0';
 }
 
 inline void RenderProc::fill_screen()
 {
-	std::cout << render_field;
+	std::cout << render_field << std::endl;;
 }
 
 inline void RenderProc::clear_screen()

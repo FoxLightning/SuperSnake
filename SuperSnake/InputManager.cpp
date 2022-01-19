@@ -11,7 +11,7 @@ InputManager::InputManager()
 			for (std::list<ControlledObject*>::iterator it = this->subject_list.begin();
 				it != this->subject_list.end(); ++it)
 			{
-				(*it)->set_input_m(in_key);
+				(*it)->set_input_console(in_key);
 			}
 		}
 	});
@@ -28,12 +28,12 @@ InputManager* InputManager::get_instance()
 	return input_manager;
 }
 
-void InputManager::add_subject(ControlledObject* subject)
+void InputManager::add_subscriber(ControlledObject* subscriber)
 {
-	subject_list.push_back(subject);
+	subject_list.push_back(subscriber);
 }
 
-void InputManager::remove_subject(ControlledObject* subject)
+void InputManager::remove_subscriber(ControlledObject* subscriber)
 {
-	subject_list.remove(subject);
+	subject_list.remove(subscriber);
 }

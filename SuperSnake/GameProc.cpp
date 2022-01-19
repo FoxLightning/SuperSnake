@@ -1,43 +1,71 @@
 #include "GameProc.h"
 #include "RenderProc.h"
 #include "PhysicalProc.h"
-
-static bool in_list(std::list<ss_t::Vector2d<int>> *list, ss_t::Vector2d<int> value) {
-	for (std::list<ss_t::Vector2d<int>>::iterator it = list->begin(); it != list->end(); ++it)
-	{
-		if (it->x == value.x && it->y == value.y)
-		{
-			return true;
-		}
-	}
-	return false;
-}
+#include "BorderManager.h"
+#include "AppleManager.h"
 
 GameProc::GameProc()
 {
-	field_size = ss_t::Vector2d<int>{ 30, 30 };
-	input_manager = InputManager::get_instance();
+	field_size = ss_t::Vector2d<int>{ss_c::FIELD_WIDTH, ss_c::FIELD_HEIGHT};
+	game_speed = 200;
 
 }
 
 void GameProc::run_game()
 {
+	/*
+	* creating game objects
+	*/
+	BorderManager borders = BorderManager::BorderManager();
+	Snake snake(ss_t::Vector2d<int>{field_size.x/2, field_size.y/2});
+	AppleManager apples = AppleManager::AppleManager();
 
-	Snake snake(ss_t::Vector2d<int>{15, 15});
+	/*
+	* creating game processors
+	*/
 	RenderProc* render_proc = RenderProc::get_instance();
 	PhysicalProc* physical_proc = PhysicalProc::get_instance();
+
+	/*
+	* run game loop
+	*/
 	while (true)
 	{
-
+		/*
+		* refresh state of dynamic objects
+		*/
 		snake.refresh_state();
-		render_proc->render();
-
-		if (physical_proc->check_colision() == ss_c::GAME_OVER)
+	
+		/*
+		* cheack colisions and hendle result
+		*/
+		switch (physical_proc->check_colision(snake.get_head(), true))
 		{
-			std::cout << "Game Over" << std::endl;
+		case ss_c::APPLE:
+			apples.remove_apple(snake.get_head());
+			apples.add_apple();
+			snake.increase_size(1);
+			break;
+		case ss_c::BORDER:
+			return;
+		case ss_c::TAIL:
 			return;
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		/*
+		* check ESC input to exit
+		*/
+		switch (get_input_console())
+		{
+		case('q'):
+			return;
+		}
+		
+		/*
+		* render game objects
+		*/
+		render_proc->render();
+		std::cout << "Score: " << snake.get_primitives().size() << std::endl;
+		std::this_thread::sleep_for(std::chrono::milliseconds(game_speed));
 	}
 
 	return;

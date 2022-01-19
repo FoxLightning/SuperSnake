@@ -27,16 +27,10 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ControlledObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RenderProc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BasePrimitive.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RenderableObject.cpp">
@@ -49,6 +43,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Observer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BorderManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AppleManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,9 +74,6 @@
     <ClInclude Include="RenderProc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasePrimitive.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RenderableObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -87,6 +87,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BorderManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppleManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
