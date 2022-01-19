@@ -1,16 +1,20 @@
 #pragma once
 
+#include <list>
 #include <chrono>
+#include <thread>
 #include <conio.h>
 #include <iostream>
-#include <thread>
-#include <algorithm>
 #include <stdlib.h>
-#include <list>
+#include <algorithm>
 
-#include "ss_common.h"
 #include "Snake.h"
+#include "ss_common.h"
+#include "RenderProc.h"
+#include "AppleManager.h"
+#include "PhysicalProc.h"
 #include "InputManager.h"
+#include "BorderManager.h"
 #include "ControlledObject.h"
 
 

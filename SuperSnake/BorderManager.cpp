@@ -3,6 +3,9 @@
 
 BorderManager::BorderManager()
 {
+	/*
+	* Create borders along the edges of the screen 
+	*/
 	for (int i = 0; i < ss_c::FIELD_WIDTH; ++i)
 	{
 		borders.push_back(ss_t::BasePrimitive{ ss_t::Vector2d<int>{i, 0}, ss_c::BORDER});

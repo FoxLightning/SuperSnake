@@ -2,6 +2,9 @@
 
 InputManager::InputManager()
 {
+	/*
+	* receive input from the console and pass it to subscribers 
+	*/
 	std::thread	input([this]() {
 		char in_key = '\0';
 		while (true)
@@ -20,6 +23,9 @@ InputManager::InputManager()
 
 InputManager* InputManager::get_instance()
 {
+	/*
+	* singlton method
+	*/
 	std::lock_guard<std::mutex> lock(mutex_);
 	if (input_manager == NULL)
 	{

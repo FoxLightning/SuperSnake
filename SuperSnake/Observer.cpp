@@ -13,6 +13,9 @@ void Observer::remove_subscriber(Subscriber* subscriber)
 
 std::list<ss_t::BasePrimitive> Observer::get_primitives()
 {
+	/*
+	* gethering primitives from all subscribers 
+	*/
 	std::list<ss_t::BasePrimitive>	current_primitives_list;
 	std::list<ss_t::BasePrimitive>	final_primitives_list;
 

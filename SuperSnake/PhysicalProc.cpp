@@ -3,6 +3,12 @@
 
 int PhysicalProc::check_colision(ss_t::Vector2d<int> place, bool skip_head)
 {
+	/*
+	* We go through all the primitives of subscribers
+	* and check the intersection with the incoming position 
+	* skip_head -needed so that when we pass the coordinates
+	* of the head not to get unexpected intersections.
+	*/
 	ss_t::Vector2d<int> current_pos{ 0, 0 };
 	std::list<ss_t::BasePrimitive> primitives_list = get_primitives();
 
@@ -30,6 +36,9 @@ int PhysicalProc::check_colision(ss_t::Vector2d<int> place)
 
 PhysicalProc* PhysicalProc::get_instance()
 {
+	/*
+	* Singlton realisation
+	*/
 	std::lock_guard<std::mutex> lock(mutex_);
 	if (physical_proc == NULL)
 	{

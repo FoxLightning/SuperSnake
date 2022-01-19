@@ -12,6 +12,9 @@ void Snake::increase_size(int value)
 
 Snake::Snake(ss_t::Vector2d<int> start_position)
 {
+	/*
+	* Create a snake in the center of the screen and increase its size 
+	*/
 	input_manager = InputManager::get_instance();
 	direction = ss_c::NORTH;
 	segments.push_back(ss_t::BasePrimitive{ start_position, ss_c::HEAD });
@@ -71,7 +74,6 @@ void Snake::get_input()
 
 void Snake::move_head()
 {
-
 	switch (direction)
 	{
 	case ss_c::WEST:

@@ -13,12 +13,16 @@ std::list<ss_t::BasePrimitive> AppleManager::get_primitives()
 
 void AppleManager::add_apple()
 {
+	/*
+	* In this function, we select random coordinates of the apple and if it is occupied,
+	* then we check the neighboring place until we find a free one 
+	*/
 	PhysicalProc *physical_proc = PhysicalProc::get_instance();
 	int rand_x = rand() % ss_c::FIELD_WIDTH;
 	int rand_y = rand() % ss_c::FIELD_HEIGHT;
 	ss_t::Vector2d<int> proposed_location{ rand_x, rand_y };
 
-
+	
 	while (ss_c::NOTHING != physical_proc->check_colision(proposed_location))
 	{
 		proposed_location.x++;
@@ -37,6 +41,9 @@ void AppleManager::add_apple()
 
 void AppleManager::remove_apple(ss_t::Vector2d<int> apple_remove)
 {
+	/*
+	* At the given coordinates, we look for an apple and delete it 
+	*/
 	apples.remove_if([&apple_remove](const ss_t::BasePrimitive& apple) {
 		return apple_remove.x == apple.position.x and apple_remove.y == apple.position.y; });
 }

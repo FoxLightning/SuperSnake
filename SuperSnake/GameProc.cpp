@@ -1,14 +1,9 @@
 #include "GameProc.h"
-#include "RenderProc.h"
-#include "PhysicalProc.h"
-#include "BorderManager.h"
-#include "AppleManager.h"
 
 GameProc::GameProc()
 {
 	field_size = ss_t::Vector2d<int>{ss_c::FIELD_WIDTH, ss_c::FIELD_HEIGHT};
 	game_speed = 200;
-
 }
 
 void GameProc::run_game()
@@ -47,8 +42,18 @@ void GameProc::run_game()
 			snake.increase_size(1);
 			break;
 		case ss_c::BORDER:
-			return;
 		case ss_c::TAIL:
+			/*
+			* endgame message
+			* exit from game loop
+			*/
+			system("cls");
+			std::cout << "\n\n\n\n\n\n\n";
+			std::cout << "\tGame over" << std::endl;
+			std::cout << "\tSCORE: " << snake.get_primitives().size() << std::endl;
+			std::cout << "\tpress any key" << std::endl;
+			set_input_console(0);
+			while (not get_input_console()) {};
 			return;
 		}
 		/*
