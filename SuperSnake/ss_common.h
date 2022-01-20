@@ -45,8 +45,8 @@ namespace ss_t
 	{
 		/*
 		* A structure that represents a cell.
-		* To renderand calculate game logic, it is
-		* enough to know the positionand type of the cell 
+		* To render and calculate game logic, it is
+		* enough to know the position and type of the cell 
 		*/
 		Vector2d<int> position;
 		int type;
