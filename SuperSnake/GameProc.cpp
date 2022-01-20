@@ -51,9 +51,7 @@ void GameProc::run_game()
 			std::cout << "\n\n\n\n\n\n\n";
 			std::cout << "\tGame over" << std::endl;
 			std::cout << "\tSCORE: " << snake.get_primitives().size() << std::endl;
-			std::cout << "\tpress any key" << std::endl;
-			set_input_console(0);
-			while (not get_input_console()) {};
+			std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 			return;
 		}
 		/*
